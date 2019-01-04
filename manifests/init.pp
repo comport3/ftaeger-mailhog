@@ -57,6 +57,7 @@ class mailhog (
   $smtp_bind_addr_ip       = $mailhog::params::smtp_bind_addr_ip,
   $smtp_bind_addr_port     = $mailhog::params::smtp_bind_addr_port,
   $storage                 = $mailhog::params::storage,
+  $maildir_path            = $mailhog::params::maildir_path,
   $ui_bind_addr_ip         = $mailhog::params::ui_bind_addr_ip,
   $ui_bind_addr_port       = $mailhog::params::ui_bind_addr_port,
   $htpasswd_users          = $mailhog::params::htpasswd_users,
@@ -109,6 +110,7 @@ class mailhog (
   validate_ip_address($smtp_bind_addr_ip)
   validate_integer($smtp_bind_addr_port, 65535, 0)
   validate_string($storage)
+  validate_absolute_path($maildir_path)
   validate_ip_address($ui_bind_addr_ip)
   validate_integer($ui_bind_addr_port, 65535, 0)
   if $htpasswd_users != undef {
