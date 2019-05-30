@@ -14,10 +14,12 @@ class mailhog::params {
   $service_enable          = true
   $service_ensure          = 'running'
   $config_template         = 'mailhog/mailhog.conf.erb'
-  $init_template           = 'mailhog/mailhog.service.erb'
+  $initd_template          = 'mailhog/initd-mailhog.erb'
+  $systemd_template        = 'mailhog/systemd-mailhog.erb'
   $service_name            = 'mailhog'
   $config                  = '/etc/mailhog.conf'
   $download_mailhog        = true
+  $wget_cache_dir          = undef
 
   #Config values for mailhog config file
   $api_bind_ip             = '0.0.0.0'
@@ -42,16 +44,25 @@ class mailhog::params {
   $smtp_bind_addr_ip       = '127.0.0.1'
   $smtp_bind_addr_port     = '1025'
   $storage                 = 'memory'
+  $maildir_path            = undef
   $ui_bind_addr_ip         = '0.0.0.0'
   $ui_bind_addr_port       = '8025'
-  $ui_web_path             = 'mailhog'
+  $htpasswd_users          = undef
+  $htpasswd_file           = '/etc/mailhog-users.htpasswd'
+  $start_script            = '/etc/start-mailhog.sh'
 
   case $::osfamily {
     'Debian': {
       #Debian specific config
       $binary_path             = '/usr/bin'
       $binary_file             = "${binary_path}/mailhog"
-      $init                    = "/etc/systemd/system/${service_name}.service"
+      $initd                   = "/etc/init.d/${service_name}"
+    }
+    'RedHat', 'Amazon': {
+      #RedHat specific config
+      $binary_path             = '/usr/bin'
+      $binary_file             = "${binary_path}/mailhog"
+      $initd                   = "/etc/init.d/${service_name}"
     }
     default: {
       fail("${::operatingsystem} not supported")
@@ -73,7 +84,7 @@ class mailhog::params {
       $download_url = "https://github.com/mailhog/MailHog/releases/download/v${mailhog_version}/MailHog_linux_arm"
       $source_file  = 'puppet:///modules/mailhog/MailHog_linux_arm'
     }
-    '386': {
+    '386', 'i386': {
       $download_url = "https://github.com/mailhog/MailHog/releases/download/v${mailhog_version}/MailHog_linux_386"
       $source_file  = 'puppet:///modules/mailhog/MailHog_linux_386'
     }

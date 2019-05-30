@@ -13,90 +13,98 @@
 # This is a POSIX shell fragment
 #
 
+# Mailhog user
+MAILHOG_USER="mailhog"
+
 # Defaults values to MailHog
 #  -api-bind-addr="0.0.0.0:8025": HTTP bind interface and port for API, e.g. 0.0.0.0:8025 or just :8025
-MH_API_BIND_ADDR="<%= @api_bind_ip %>:<%= @api_bind_port %>"
+MAILHOG_API_BIND_ADDR="<%= @api_bind_ip %>:<%= @api_bind_port %>"
 
 #  -api-host="": API URL for MailHog UI to connect to, e.g. http://some.host:1234
-#MH_API_HOST="<%= @api_bind_host %>"
+MAILHOG_API_HOST="<%= @api_bind_host %>"
 
 #  -cors-origin="": CORS Access-Control-Allow-Origin header for API endpoints
-MH_CORS_ORIGIN="<%= @cors_origin %>"
+MAILHOG_CORS_ORIGIN="<%= @cors_origin %>"
 
 #  -hostname="mailhog.example": Hostname for EHLO/HELO response, e.g. mailhog.example
-MH_HOSTNAME="<%= @hostname %>"
+MAILHOG_HOSTNAME="<%= @hostname %>"
 
 #  -invite-jim=false: Decide whether to invite Jim (beware, he causes trouble)
-#MH_INVITE_JIM="<%= @invite_jim %>"
+MAILHOG_INVITE_JIM="<%= @invite_jim %>"
 
 #  -jim-accept=0.99: Chance of accept
-#MH_JIM_ACCEPT="<%= @jim_accept %>"
+MAILHOG_JIM_ACCEPT="<%= @jim_accept %>"
 
 #  -jim-disconnect=0.005: Chance of disconnect
-#MH_JIM_DISCONNECT="<%= @jim_disconnect %>"
+MAILHOG_JIM_DISCONNECT="<%= @jim_disconnect %>"
 
 #  -jim-linkspeed-affect=0.1: Chance of affecting link speed
-#MH_JIM_LINKSPEED_AFFECT="<%= @jim_linkspeed_affect %>"
+MAILHOG_JIM_LINKSPEED_AFFECT="<%= @jim_linkspeed_affect %>"
 
 #  -jim-linkspeed-max=10240: Maximum link speed (in bytes per second)
-#MH_JIM_LINKSPEED_MAX="<%= @jim_linkspeed_max %>"
+MAILHOG_JIM_LINKSPEED_MAX="<%= @jim_linkspeed_max %>"
 
 #  -jim-linkspeed-min=1024: Minimum link speed (in bytes per second)
-#MH_JIM_LINKSPEED_MIN="<%= @jim_linkspeed_min %>"
+MAILHOG_JIM_LINKSPEED_MIN="<%= @jim_linkspeed_min %>"
 
 #  -jim-reject-auth=0.05: Chance of rejecting authentication (AUTH)
-#MH_JIM_REJECT_AUTH="<%= @jim_reject_auth %>"
+MAILHOG_JIM_REJECT_AUTH="<%= @jim_reject_auth %>"
 
 #  -jim-reject-recipient=0.05: Chance of rejecting a recipient (RCPT TO)
-#MH_JIM_REJECT_RECIPIENT="<%= @jim_reject_recipient %>"
+MAILHOG_JIM_REJECT_RECIPIENT="<%= @jim_reject_recipient %>"
 
 #  -jim-reject-sender=0.05: Chance of rejecting a sender (MAIL FROM)
-#MH_JIM_REJECT_SENDER="<%= @jim_reject_sender %>"
+MAILHOG_JIM_REJECT_SENDER="<%= @jim_reject_sender %>"
 
 #  -mongo-coll="messages": MongoDB collection, e.g. messages
-MH_MONGO_COLLECTION="<%= @mongo_coll %>"
+MAILHOG_MONGO_COLL="<%= @mongo_coll %>"
 
 #  -mongo-db="mailhog": MongoDB database, e.g. mailhog
-MH_MONGO_DB="<%= @mongo_db %>"
+MAILHOG_MONGO_DB="<%= @mongo_db %>"
 
 #  -mongo-uri="127.0.0.1:27017": MongoDB URI, e.g. 127.0.0.1:27017
-MH_MONGO_URI="<%= @mongo_uri_ip %>:<%= @mongo_uri_port %>"
+MAILHOG_MONGO_URI="<%= @mongo_uri_ip %>:<%= @mongo_uri_port %>"
 
 #  -outgoing-smtp="": JSON file containing outgoing SMTP servers
-MH_OUTGOING_SMTP="<%= @outgoing_smtp %>"
+MAILHOG_OUTGOING_SMTP="<%= @outgoing_smtp %>"
 
 #  -smtp-bind-addr="0.0.0.0:1025": SMTP bind interface and port, e.g. 0.0.0.0:1025 or just :1025
-MH_SMTP_BIND_ADDR="<%= @smtp_bind_addr_ip %>:<%= @smtp_bind_addr_port %>"
+MAILHOG_SMTP_BIND_ADDR="<%= @smtp_bind_addr_ip %>:<%= @smtp_bind_addr_port %>"
 
-#  -storage="memory": Message storage: memory (default) or mongodb
-MH_STORAGE="<%= @storage %>"
+#  -storage="memory": Message storage: memory (default), mongodb or maildir
+MAILHOG_STORAGE="<%= @storage %>"
+
+#  --maildir-path ="": Maildir path (for maildir storage backend)
+MAILDIR_PATH="<%= @maildir_path %>"
 
 #  -ui-bind-addr="0.0.0.0:8025": HTTP bind interface and port for UI, e.g. 0.0.0.0:8025 or just :8025
-MH_UI_BIND_ADDR="<%= @ui_bind_addr_ip %>:<%= @ui_bind_addr_port %>"
+MAILHOG_UI_BIND_ADDR="<%= @ui_bind_addr_ip %>:<%= @ui_bind_addr_port %>"
 
-#  -ui-web-path="/mailhog": changes the UI listened to for requests, used behind a reverse proxy
-MH_UI_WEB_PATH="<%= @ui_web_path %>"
+#  -auth-file="docs/example-auth": HTTP basic authentication. One user per line, password is bcrypted
+MAILHOG_AUTH_FILE="<%= @htpasswd_file %>"
 
 # Additional options that are passed to the Daemon.
-DAEMON_OPTS="-api-bind-addr=$MH_API_BIND_ADDR \
-             -api-host=$MH_API_HOST \
-             -cors-origin=$MH_CORS_ORIGIN \
-             -hostname=$MH_HOSTNAME \
-             -invite-jim=$MH_INVITE_JIM \
-             -jim-accept=$MH_JIM_ACCEPT \
-             -jim-disconnect=$MH_JIM_DISCONNECT \
-             -jim-linkspeed-affect=$MH_JIM_LINKSPEED_AFFECT \
-             -jim-linkspeed-max=$MH_JIM_LINKSPEED_MAX \
-             -jim-linkspeed-min=$MH_JIM_LINKSPEED_MIN \
-             -jim-reject-auth=$MH_JIM_REJECT_AUTH \
-             -jim-reject-recipient=$MH_JIM_REJECT_RECIPIENT \
-             -jim-reject-sender=$MH_JIM_REJECT_SENDER \
-             -mongo-coll=$MH_MONGO_COLLECTION \
-             -mongo-db=$MH_MONGO_DB \
-             -mongo-uri=$MH_MONGO_URI \
-             -outgoing-smtp=$MH_OUTGOING_SMTP \
-             -smtp-bind-addr=$MH_SMTP_BIND_ADDR \
-             -storage=$MH_STORAGE \
-             -ui-bind-addr=$MH_UI_BIND_ADDR \
-             -ui-web-path=$MH_UI_WEB_PATH \
-            "
+DAEMON_OPTS="-api-bind-addr=$MAILHOG_API_BIND_ADDR \
+             -api-host=$MAILHOG_API_HOST \
+             -cors-origin=$MAILHOG_CORS_ORIGIN \
+             -hostname=$MAILHOG_HOSTNAME \
+             -invite-jim=$MAILHOG_INVITE_JIM \
+             -jim-accept=$MAILHOG_JIM_ACCEPT \
+             -jim-disconnect=$MAILHOG_JIM_DISCONNECT \
+             -jim-linkspeed-affect=$MAILHOG_JIM_LINKSPEED_AFFECT \
+             -jim-linkspeed-max=$MAILHOG_JIM_LINKSPEED_MAX \
+             -jim-linkspeed-min=$MAILHOG_JIM_LINKSPEED_MIN \
+             -jim-reject-auth=$MAILHOG_JIM_REJECT_AUTH \
+             -jim-reject-recipient=$MAILHOG_JIM_REJECT_RECIPIENT \
+             -jim-reject-sender=$MAILHOG_JIM_REJECT_SENDER \
+             -mongo-coll=$MAILHOG_MONGO_COLL \
+             -mongo-db=$MAILHOG_MONGO_DB \
+             -mongo-uri=$MAILHOG_MONGO_URI \
+             -outgoing-smtp=$MAILHOG_OUTGOING_SMTP \
+             -smtp-bind-addr=$MAILHOG_SMTP_BIND_ADDR \
+             -maildir-path=$MAILDIR_PATH \
+             -storage=$MAILHOG_STORAGE \<%- if @htpasswd_users %>
+             -auth-file=$MAILHOG_AUTH_FILE \
+<% end -%>
+
+             -ui-bind-addr=$MAILHOG_UI_BIND_ADDR"
