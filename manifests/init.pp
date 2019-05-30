@@ -50,7 +50,6 @@ class mailhog (
   String           $ui_web_path          = $mailhog::params::ui_web_path,
   String           $config_template      = $mailhog::params::config_template,
   String           $config               = $mailhog::params::config,
-  String           $init                 = $mailhog::params::init,
   Boolean          $service_manage       = $mailhog::params::service_manage,
   Boolean          $service_enable       = $mailhog::params::service_enable,
   String           $service_ensure       = $mailhog::params::service_ensure,
