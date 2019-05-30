@@ -49,7 +49,6 @@ class mailhog (
   String           $ui_bind_addr_port    = $mailhog::params::ui_bind_addr_port,
   String           $ui_web_path          = $mailhog::params::ui_web_path,
   String           $config_template      = $mailhog::params::config_template,
-  String           $init_template        = $mailhog::params::init_template,
   String           $config               = $mailhog::params::config,
   String           $init                 = $mailhog::params::init,
   Boolean          $service_manage       = $mailhog::params::service_manage,
