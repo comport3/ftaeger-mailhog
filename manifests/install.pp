@@ -69,7 +69,7 @@ class mailhog::install inherits mailhog {
 
   }
 
-  if $running_on_systemd {
+  if $facts['service_provider'] == 'systemd' { 
     file { "/etc/systemd/system/${service_name}.service":
       ensure  => file,
       owner   => 'root',
@@ -84,7 +84,7 @@ class mailhog::install inherits mailhog {
       mode    => '0755',
       content => template("${module_name}/start-mailhog.sh.erb"),
     }
-  } else{
+  } else {
     # Deploy mailhog init script
     file { $mailhog::initd:
       ensure  => file,
