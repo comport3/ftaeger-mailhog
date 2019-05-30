@@ -68,7 +68,7 @@ include mailhog
 
 Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
 
-## Reference
+##Reference
 
 ### Classes
 #### Public Classes
@@ -85,11 +85,11 @@ Due to the size limit of packages uploaded to the Forge, the module was designed
 * `$download_mailhog = true` (default): The MailHog binary will be downloaded from the official MailHog Github repository. This is good for a few servers as this is very modular and the module can be used right away. 
 * `$download_mailhog = false`: The MailHog binary will be sourced from the "files" subdirectory of this module. This is perfect to roll out multiple hosts with this module. In case this feature is required, the admin needs to download the 3 MailHog Linux binaries (MailHog_linux_386, MailHog_linux_arm, MailHog_linux_amd64) to the "files" folder of this module. Just call the mailhog class with `$download_mailhog = false`.  
 
-### Parameters
+###Parameters
 The following parameters are available in the ::mailhog class:
 
 
-#### MailHog config values
+####MailHog config values
 | parameter                                |      default value      |  description |
 |------------------------------------------|-------------------------|--------------|
 | `$api_bind_ip`          | 0.0.0.0   | The IP address the API server will be bound to. |
@@ -113,17 +113,16 @@ The following parameters are available in the ::mailhog class:
 | `$outgoing_smtp`        | undef     | JSON file containing outgoing SMTP servers |
 | `$smtp_bind_addr_ip`    | 127.0.0.1 | SMTP bind interface, this is where MailHog will receive incoming mails |
 | `$smtp_bind_addr_port`  | 1025      | SMTP bind port, this is where MailHog will receive incoming mails |
-| `$storage`              | memory    | Message storage: `memory`, `mongodb` or `maildir` |
+| `$storage`              | memory    | Message storage: memory or mongodb |
 | `$ui_bind_addr_ip`      | 0.0.0.0   | HTTP bind interface for WebUI |
 | `$ui_bind_addr_port`    | 8025      | HTTP bind port for WebUI |
-| `$htpasswd_users   `    |undef      | HTTP basic authentication. Password is bcrypted i.e. for test:test `test:$2y$05$9NnaYrT1XGXerV5R2RfMDOHQAO946jil2xiWO4eEjjS2co6tHIzp6` |
 
 
 
-#### Puppet module config values
+####Puppet module config values
 | parameter                                |      default value       |  description |
 |------------------------------------------|--------------------------|--------------|
-| `$mailhog_version`              | 1.0.0                    | Version of Mailhog to be used. Feel free to look up the latest release version from [GitHub](https://github.com/mailhog/MailHog/releases/latest) |
+| `$mailhog_version`              | 0.2.0                    | Version of Mailhog to be used. Feel free to look up the latest release version from [GitHub](https://github.com/mailhog/MailHog/releases/latest) |
 | `$config`               | /etc/mailhog.conf        | Path and filename for mailhog config file at the target system |
 | `$mailhog::service_manage`               | true                     | Whether the service should be managed by this module or not. |
 | `$service_enable`       | true                     | Whether the service should be started on boot or not. |
@@ -145,7 +144,7 @@ Today the module was tested with Ubuntu 14.04 and 12.04 only. It might work with
 Feel free to pull the repository and commit changes. I will review them asap and add them if I think they are helpful or reasonable. No guarantees but a lot of heart ;-)
 
 
-### Contributors
+###Contributors
 
 To see who's already involved, see the [list of contributors.](https://github.com/ftaeger/ftaeger-mailhog/graphs/contributors)
 

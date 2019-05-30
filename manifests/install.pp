@@ -18,7 +18,7 @@ class mailhog::install inherits mailhog {
 
   # Download Mailhog binary
   if $mailhog::download_mailhog {
-    
+
     file { "$mailhog::homedir":
       ensure => directory,
     }
@@ -41,7 +41,7 @@ class mailhog::install inherits mailhog {
       target => "$mailhog::homedir/mailhog-$mailhog::mailhog_version",
       require => File[ "$mailhog::homedir/mailhog-$mailhog::mailhog_version" ],
     }
-    
+
     if ! defined(Package['curl']) {
       package { 'curl':
         ensure => installed,
@@ -51,7 +51,7 @@ class mailhog::install inherits mailhog {
 
   # else use binary files located on puppet master.
   else {
-    
+
     file { "$mailhog::homedir/mailhog-$mailhog::mailhog_version":
       ensure => present,
       mode => "0755",
@@ -69,38 +69,23 @@ class mailhog::install inherits mailhog {
 
   }
 
-  if $running_on_systemd {
-    file { "/etc/systemd/system/${service_name}.service":
-      ensure  => file,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      content => template($mailhog::systemd_template),
-    }
-    file { $mailhog::start_script:
-      ensure  => file,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      content => template("${module_name}/start-mailhog.sh.erb"),
-    }
-  } else{
-    # Deploy mailhog init script
-    file { $mailhog::initd:
-      ensure  => file,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      content => template($mailhog::initd_template),
-    }
-  }
-
-  file { $mailhog::htpasswd_file:
+  # Deploy mailhog init script
+  file { $mailhog::init:
     ensure  => file,
     owner   => 'root',
     group   => 'root',
-    mode    => '0600',
-    content => template("${module_name}/htpasswd.erb"),
+    mode    => '0755',
+    content => template($mailhog::init_template),
+  }
+
+  # Deploy mhsendmail
+  file { ['/usr/local/bin/mhsendmail','/usr/sbin/sendmail']:
+    source  => 'puppet:///modules/mailhog/mhsendmail',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    replace => true,
   }
 
 }

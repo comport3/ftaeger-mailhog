@@ -1,22 +1,19 @@
 {
   "name": "ftaeger-mailhog",
-  "version": "1.1.0",
-  "author": "ftaeger",
+  "version": "1.1.1",
+  "author": "ftaeger, Grant Davies",
   "summary": "Install & Configure MailHog",
   "license": "Apache-2.0",
   "source": "https://github.com/ftaeger/ftaeger-mailhog/",
   "project_page": "https://github.com/ftaeger/ftaeger-mailhog/",
   "issues_url": "https://github.com/ftaeger/ftaeger-mailhog/issues",
   "dependencies": [
-    {
-      "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.10.0 < 5.0.0"
-    }
+    {"name":"puppetlabs/stdlib","version_requirement":">= 4.10.0"}
   ],
+  "data_provider": null,
   "operatingsystem_support": [
     {
-      "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "14.04", "12.04" ]
+      "operatingsystem": "Ubuntu"
     }
   ]
 }
